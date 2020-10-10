@@ -7,7 +7,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/shitposting/randomapi/backstore"
+	"github.com/shitpostingio/randomapi/backstore"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )

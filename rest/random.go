@@ -6,7 +6,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/shitposting/randomapi/rest/client"
+	"github.com/shitpostingio/randomapi/rest/client"
 )
 
 // Random will return a random meme

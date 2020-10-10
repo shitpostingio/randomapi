@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/toml"
-	"github.com/shitposting/randomapi/config"
+	"github.com/shitpostingio/randomapi/config"
 )
 
 var (

@@ -12,8 +12,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 
 	"github.com/rs/xid"
-	"github.com/shitposting/randomapi/config"
-	"github.com/shitposting/randomapi/entities"
+	"github.com/shitpostingio/randomapi/config"
+	"github.com/shitpostingio/randomapi/entities"
 
 	// mysql gorm adapter
 	_ "github.com/jinzhu/gorm/dialects/mysql"

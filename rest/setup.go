@@ -6,7 +6,7 @@ import (
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
-	"github.com/shitposting/randomapi/backstore"
+	"github.com/shitpostingio/randomapi/backstore"
 )
 
 //Setup initialize the http server

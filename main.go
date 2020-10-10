@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/shitposting/randomapi/backstore"
-	"github.com/shitposting/randomapi/rest"
+	"github.com/shitpostingio/randomapi/backstore"
+	"github.com/shitpostingio/randomapi/rest"
 )
 
 const (

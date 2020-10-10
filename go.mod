@@ -1,4 +1,4 @@
-module github.com/shitposting/randomapi
+module github.com/shitpostingio/randomapi
 
 go 1.15
 
