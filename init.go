@@ -7,7 +7,6 @@ import (
 	"log"
 	"time"
 
-	"github.com/shitpostingio/randomapi/backstore"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
@@ -15,17 +14,11 @@ import (
 func init() {
 	setCLIParams()
 
-	if !debug {
-		allowedOrigins = append(allowedOrigins, "*")
-	} else {
-		allowedOrigins = append(allowedOrigins, "random.shitposting.io")
-	}
-
 	if err := envSetup(); err != nil {
 		log.Fatal(fmt.Errorf("cannot detect env: %w", err))
 	}
 
-	client, err := mongo.Connect(context.Background(), c.Mongo.MongoDBConnectionOptions())
+	client, err := mongo.Connect(context.Background(), c.MongoRandom.MongoDBConnectionOptions())
 	if err != nil {
 		log.Fatal("Unable to connect to document store:", err)
 	}
@@ -36,15 +29,9 @@ func init() {
 		log.Fatal("Unable to ping document store:", err)
 	}
 
-	collection := client.Database(c.Mongo.DatabaseName).Collection(c.Mongo.CollectionName)
+	collection := client.Database(c.MongoRandom.DatabaseName).Collection(c.MongoRandom.CollectionName)
 
-	bs, err = backstore.NewBackstore(c, collection)
-	if err != nil {
-		err = fmt.Errorf("cannot build backstore: %w", err)
-		log.Fatal(err)
-	}
-
-	feedErrors = make(chan error)
+	errChan = make(chan error)
 }
 
 func setCLIParams() {

@@ -29,9 +29,5 @@ func envSetup() error {
 		c.MemeFolder = c.MemeFolder + "/"
 	}
 
-	if !strings.HasSuffix(c.MemeSymlinkFolder, "/") {
-		c.MemeSymlinkFolder = c.MemeSymlinkFolder + "/"
-	}
-
 	return nil
 }
