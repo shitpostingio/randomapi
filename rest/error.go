@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/shitposting/randomapi/rest/client"
+	"github.com/shitpostingio/randomapi/rest/client"
 )
 
 // writeError writes a JSON-formatted error message on w, with err as reason,

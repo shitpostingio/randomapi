@@ -1,7 +1,7 @@
 package rest
 
 import (
-	"github.com/shitposting/randomapi/backstore"
+	"github.com/shitpostingio/randomapi/backstore"
 )
 
 // Interface is a struct holding data needed by the REST
