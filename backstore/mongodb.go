@@ -25,16 +25,24 @@ func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error
 				{Key: "size", Value: 1},
 			},
 		},
+		{
+			Key: "$match",
+			Value: bson.D{
+				{Key: "has_error", Value: false},
+				{Key: "deleted_at", Value: nil},
+				{Key: "posted_at", Value: bson.E{Key: "$exists", Value: true}},
+			},
+		},
+	}
+	
+	//
+	cursor, err := collection.Aggregate(ctx, filter, options.Aggregate())
+	if err != nil {
+		return post, err
 	}
 
 	//
-	result := collection.FindOne(ctx, filter, options.FindOne())
-	if result.Err() != nil {
-		return post, result.Err()
-	}
-
-	//
-	err = result.Decode(&post)
+	err = cursor.Decode(&post)
 	return post, err
 
 }
