@@ -16,8 +16,8 @@ func envSetup() error {
 		c.Port = 34378
 	}
 
-	if !strings.HasSuffix(c.MemeFolder, "/") {
-		c.MemeFolder = c.MemeFolder + "/"
+	if !strings.HasSuffix(c.PostFolder, "/") {
+		c.PostFolder = c.PostFolder + "/"
 	}
 
 	if strings.HasSuffix(c.Endpoint, "/") {
