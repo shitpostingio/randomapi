@@ -59,7 +59,7 @@ func getRandomMeme(collection *mongo.Collection) (client.Response, error) {
 	}
 
 	requestedPosts[filename] = requestedPost{
-		path:        fmt.Sprintf("%s/%s", c.MemeFolder, filename),
+		path:        fmt.Sprintf("%s/%s", c.PostFolder, filename),
 		mediatype:   post.Media.Type,
 		requestdate: time.Now(),
 	}

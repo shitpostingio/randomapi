@@ -20,18 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4918714c-5209-4097-a585-190639a8df52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backstore/mongodb.go" beforeDir="false" afterPath="$PROJECT_DIR$/backstore/mongodb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.go" beforeDir="false" afterPath="$PROJECT_DIR$/init.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/env.go" beforeDir="false" afterPath="$PROJECT_DIR$/env.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/random.go" beforeDir="false" afterPath="$PROJECT_DIR$/random.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/servememe.go" beforeDir="false" afterPath="$PROJECT_DIR$/servememe.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.go" beforeDir="false" afterPath="$PROJECT_DIR$/setup.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/types.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vars.go" beforeDir="false" afterPath="$PROJECT_DIR$/vars.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +79,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

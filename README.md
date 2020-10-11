@@ -1,8 +1,8 @@
-# Memes API
+# random API
 
-**Get a random meme**
+**Get a random post**
 ----
-  Get a random meme from our collection
+  Get a random meme from a mongodb collection
 
 * **URL**
 
@@ -11,20 +11,6 @@
 * **Method:**
 
   `GET`
-  
-*  **URL Params**
-
-   **Optionals:**
- 
-   - `type=[image, video, animation]`
-   - `startDate=unixdate` get a meme that has been posted after given date
-   - `endDate=unixdate` get a meme that has been posted before given date
-
-* **HTTP Headers**
-    
-    **Required:**
-    - `X-user-platform`
-    - `X-user-id`
 
 * **Success Response:**
 
@@ -35,9 +21,7 @@
     "id": "bo7od5qka8toqdhaph8g",
     "data": {
         "url": "https://api.shitposting.io/storage/rand_bo7od5qka8toqdhaph8g.jpg",
-        "caption": "Is this true? We need more straight men, and women, in @thememaly RIGHT NOW\n\nJoin us and discuss\n\n\\[By BlueTag]",
         "filename": "rand_bo7od5qka8toqdhaph8g.jpg",
-        "messageid": 18048,
         "mediatype": "image",
         "date": "2018-03-30T10:55:09+02:00"
         }
