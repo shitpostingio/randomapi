@@ -4,20 +4,11 @@ import (
 	"strings"
 
 	"github.com/BurntSushi/toml"
-	"github.com/shitpostingio/randomapi/config"
-)
-
-var (
-	c              *config.Config
-	debug          bool
-	allowedOrigins []string
-
-	path string
 )
 
 func envSetup() error {
 
-	if _, err := toml.DecodeFile(path, &c); err != nil {
+	if _, err := toml.DecodeFile(configFilePath, &c); err != nil {
 		return err
 	}
 
@@ -27,6 +18,10 @@ func envSetup() error {
 
 	if !strings.HasSuffix(c.MemeFolder, "/") {
 		c.MemeFolder = c.MemeFolder + "/"
+	}
+
+	if strings.HasSuffix(c.Endpoint, "/") {
+		c.Endpoint = strings.TrimSuffix(c.Endpoint, "/")
 	}
 
 	return nil
