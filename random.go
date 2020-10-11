@@ -1,38 +1,27 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strings"
 
 	"github.com/shitpostingio/randomapi/rest/client"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // Random will return a random meme
-func Random(w http.ResponseWriter, r *http.Request) {
+func random(w http.ResponseWriter, r *http.Request) {
 
-	memeDetails, err := GetRandomMeme("")
+	meme, err := getRandomMeme(r.Host, memesCollection)
 	if err != nil {
 		writeError(w, err, http.StatusBadRequest)
 		return
 	}
 
-	m := client.Response{
-		ID: memeDetails.ID,
-		Meme: client.Data{
-			URL:      memeDetails.URL,
-			Filename: memeDetails.Filename,
-			Type:     memeDetails.MediaType,
-			Date:     memeDetails.PostedAt,
-		},
-	}
-
-	if strings.HasPrefix(r.Host, "localhost") || strings.HasPrefix(r.Host, "127.0.0.1") || strings.HasPrefix(r.Host, "::1") {
-		m.Meme.URL = memeDetails.FilePath
-	}
-
-	jenc := json.NewEncoder(w)
-	err = jenc.Encode(m)
+	err = json.NewEncoder(w).Encode(meme)
 	if err != nil {
 		writeError(w, err, http.StatusInternalServerError)
 	}
@@ -40,6 +29,29 @@ func Random(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func getRandomMeme() {
+func getRandomMeme(host string, collection *mongo.Collection) (client.Response, error) {
 
+	
+
+
+	return nil, nil
+}
+
+func findPost(collection *mongo.Collection) (Post, error) {
+	//
+	ctx, cancelCtx := context.WithTimeout(context.Background(), opDeadline)
+	defer cancelCtx()
+
+	//
+	filter := bson.M{"media.fileuniqueid": uniqueID}
+
+	//
+	result := collection.FindOne(ctx, filter, options.FindOne())
+	if result.Err() != nil {
+		return post, result.Err()
+	}
+
+	//
+	err = result.Decode(&post)
+	return post, err
 }
