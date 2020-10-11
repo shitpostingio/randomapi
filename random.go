@@ -1,15 +1,14 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
-	"strings"
+
+	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
 
 	"github.com/shitpostingio/randomapi/rest/client"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // Random will return a random meme
@@ -31,27 +30,28 @@ func random(w http.ResponseWriter, r *http.Request) {
 
 func getRandomMeme(host string, collection *mongo.Collection) (client.Response, error) {
 
-	
+	post, err := findPost(collection)
+	if err != nil {
+		return client.Response{}, err
+	}
 
+	postID := uuid.New().String()
 
-	return nil, nil
+	randompost := client.Response{
+		ID: postID,
+		Meme: client.Data{
+			URL:      fmt.Sprintf("%s/storage/%s", c.Endpoint, post.Media.FileID),
+			Filename: "",
+			Type:     post.Media.Type,
+			Date:     post.PostedAt,
+		},
+	}
+
+	return randompost, nil
 }
 
 func findPost(collection *mongo.Collection) (Post, error) {
-	//
-	ctx, cancelCtx := context.WithTimeout(context.Background(), opDeadline)
-	defer cancelCtx()
+	var post Post
 
-	//
-	filter := bson.M{"media.fileuniqueid": uniqueID}
-
-	//
-	result := collection.FindOne(ctx, filter, options.FindOne())
-	if result.Err() != nil {
-		return post, result.Err()
-	}
-
-	//
-	err = result.Decode(&post)
-	return post, err
+	return post, nil
 }

@@ -18,7 +18,7 @@ func Setup(bindAddress string, allowedOrigins []string) *http.Server {
 	heads := handlers.AllowedHeaders([]string{"x-user-platform", "x-user-id", "Content-Type", "content-type", "Origin"})
 
 	router.HandleFunc("/random/{type}", random).Methods(http.MethodGet, http.MethodOptions)
-	router.HandleFunc("/random/storage/{id}", serveMeme).(http.MethodGet)
+	router.HandleFunc("/random/storage/{id}", serveMeme).Methods(http.MethodGet)
 
 	srv := &http.Server{
 		Handler: handlers.CORS(meths, origins, heads)(router),
