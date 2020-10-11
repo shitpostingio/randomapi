@@ -26,6 +26,8 @@ func main() {
 		}
 	}()
 
+	go startCleanRequestRoutine()
+
 	server := Setup(fmt.Sprintf(bindString, c.Port), allowedOrigins)
 
 	log.Printf("random memes api started\nVersion: %s\nBuild: %s", Version, Build)

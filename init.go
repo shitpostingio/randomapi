@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -19,7 +18,7 @@ func init() {
 		log.Fatal(fmt.Errorf("cannot detect env: %w", err))
 	}
 
-	mongoClient, err := mongo.Connect(context.Background(), c.MongoRandom.MongoDBConnectionOptions())
+	mongoClient, err := mongo.Connect(context.Background(), c.MongoMemes.MongoDBConnectionOptions())
 	if err != nil {
 		log.Fatal("Unable to connect to document store:", err)
 	}
@@ -30,10 +29,8 @@ func init() {
 		log.Fatal("Unable to ping document store:", err)
 	}
 
-	memesCollection = mongoClient.Database(c.MongoRandom.DatabaseName).Collection(c.MongoRandom.CollectionName)
-
 	errChan = make(chan error)
-	requestedMemes = make(map[string]*os.File)
+	requestedPosts = make(map[string]requestedPost)
 }
 
 func setCLIParams() {

@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
-	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
+	"github.com/shitpostingio/randomapi/backstore"
 
+	"github.com/google/uuid"
 	"github.com/shitpostingio/randomapi/rest/client"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -14,7 +16,7 @@ import (
 // Random will return a random meme
 func random(w http.ResponseWriter, r *http.Request) {
 
-	meme, err := getRandomMeme(r.Host, memesCollection)
+	meme, err := getRandomMeme(memesCollection)
 	if err != nil {
 		writeError(w, err, http.StatusBadRequest)
 		return
@@ -28,30 +30,39 @@ func random(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func getRandomMeme(host string, collection *mongo.Collection) (client.Response, error) {
+func getRandomMeme(collection *mongo.Collection) (client.Response, error) {
 
-	post, err := findPost(collection)
+	post, err := backstore.FindRandomPost(collection)
 	if err != nil {
 		return client.Response{}, err
 	}
 
 	postID := uuid.New().String()
 
+	var ext string
+	if post.Media.Type == "image" {
+		ext = "jpg"
+	} else {
+		ext = "mp4"
+	}
+
+	filename := fmt.Sprintf("%s.%s", post.Media.FileID, ext)
+
 	randompost := client.Response{
 		ID: postID,
 		Meme: client.Data{
-			URL:      fmt.Sprintf("%s/storage/%s", c.Endpoint, post.Media.FileID),
-			Filename: "",
+			URL:      fmt.Sprintf("%s/storage/%s", c.Endpoint, filename),
+			Filename: filename,
 			Type:     post.Media.Type,
 			Date:     post.PostedAt,
 		},
 	}
 
+	requestedPosts[filename] = requestedPost{
+		path:        fmt.Sprintf("%s/%s", c.MemeFolder, filename),
+		mediatype:   post.Media.Type,
+		requestdate: time.Now(),
+	}
+
 	return randompost, nil
-}
-
-func findPost(collection *mongo.Collection) (Post, error) {
-	var post Post
-
-	return post, nil
 }

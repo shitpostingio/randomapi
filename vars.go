@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/shitpostingio/randomapi/config"
 	"go.mongodb.org/mongo-driver/mongo"
 )
@@ -16,5 +14,5 @@ var (
 
 	memesCollection *mongo.Collection
 
-	requestedMemes map[string]*os.File
+	requestedPosts map[string]requestedPost
 )

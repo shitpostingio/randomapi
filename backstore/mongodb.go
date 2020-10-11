@@ -2,18 +2,18 @@ package backstore
 
 import (
 	"context"
+	"time"
+
 	"github.com/shitpostingio/autopostingbot/documentstore/entities"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"time"
 )
 
 const opDeadline = 10 * time.Second
 
 func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error) {
 
-	//
 	ctx, cancelCtx := context.WithTimeout(context.Background(), opDeadline)
 	defer cancelCtx()
 
