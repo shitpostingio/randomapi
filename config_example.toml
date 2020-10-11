@@ -1,0 +1,12 @@
+PostFolder = ""
+
+Endpoint = ""
+
+[Mongo]
+    DatabaseName = ""
+    Username = ""
+    Password = ""
+    AuthSource = ""
+    CollectionName = ""
+    ReplicaSetName = ""
+    Hosts = ["", ""]
