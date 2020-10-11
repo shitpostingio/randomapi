@@ -20,17 +20,17 @@ func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error
 	//
 	filter := bson.D{
 		{
-			Key: "$sample",
-			Value: bson.D{
-				{Key: "size", Value: 1},
-			},
-		},
-		{
 			Key: "$match",
 			Value: bson.D{
 				{Key: "haserror", Value: nil},
 				{Key: "deletedat", Value: nil},
 				{Key: "postedat", Value: bson.E{Key: "$exists", Value: true}},
+			},
+		},
+		{
+			Key: "$sample",
+			Value: bson.D{
+				{Key: "size", Value: 1},
 			},
 		},
 	}
