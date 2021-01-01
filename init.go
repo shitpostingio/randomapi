@@ -23,8 +23,9 @@ func init() {
 		log.Fatal("Unable to connect to document store:", err)
 	}
 
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
-	err = mongoClient.Ping(ctx, readpref.Primary())
+	pingCtx, cancelPingCtx := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancelPingCtx()
+	err = client.Ping(pingCtx, readpref.Primary())
 	if err != nil {
 		log.Fatal("Unable to ping document store:", err)
 	}
