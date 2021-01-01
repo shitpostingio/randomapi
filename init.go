@@ -25,7 +25,7 @@ func init() {
 
 	pingCtx, cancelPingCtx := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancelPingCtx()
-	err = client.Ping(pingCtx, readpref.Primary())
+	err = mongoClient.Ping(pingCtx, readpref.Primary())
 	if err != nil {
 		log.Fatal("Unable to ping document store:", err)
 	}
