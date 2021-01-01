@@ -30,7 +30,7 @@ func init() {
 		log.Fatal("Unable to ping document store:", err)
 	}
 
-	database = mongoClient.Database(cfg.DatabaseName)
+	database := mongoClient.Database(c.MongoMemes.DatabaseName)
 	memesCollection = database.Collection("posts")
 
 	errChan = make(chan error)
