@@ -50,7 +50,7 @@ func getRandomMeme(collection *mongo.Collection) (client.Response, error) {
 
 	randompost := client.Response{
 		ID: postID,
-		Meme: client.Data{
+		Post: client.Data{
 			URL:      fmt.Sprintf("%s/storage/%s", c.Endpoint, filename),
 			Filename: filename,
 			Type:     post.Media.Type,

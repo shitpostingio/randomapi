@@ -2,14 +2,14 @@ package client
 
 import "time"
 
-// Response represent a meme.
+// Response represent a post.
 type Response struct {
 	ID    string `json:"id,omitempty"`
-	Meme  Data   `json:"meme,omitempty"`
+	Post  Data   `json:"post,omitempty"`
 	Error string `json:"error,omitempty"`
 }
 
-// Data contains data info about a random meme
+// Data contains data info about a random post
 type Data struct {
 	URL      string     `json:"url"`
 	Filename string     `json:"filename"`
