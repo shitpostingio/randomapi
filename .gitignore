@@ -2,3 +2,7 @@
 randomapi
 main
 .idea/
+*.exe
+config.toml
+.idea/workspace.xml
+.idea/workspace.xml
