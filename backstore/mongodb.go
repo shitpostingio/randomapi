@@ -12,7 +12,7 @@ import (
 
 const opDeadline = 10 * time.Second
 
-func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error) {
+func FindRandomPost(collection *mongo.Collection) (entities.Post, error) {
 
 	ctx, cancelCtx := context.WithTimeout(context.Background(), opDeadline)
 	defer cancelCtx()
@@ -25,7 +25,7 @@ func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error
 				Value: bson.D{
 					{Key: "haserror", Value: nil},
 					{Key: "deletedat", Value: nil},
-					{Key: "postedat", Value: bson.E{Key: "$exists", Value: true}},
+					{Key: "postedat", Value: bson.D{{Key: "$exists", Value: true}}},
 				},
 			},
 		},
@@ -42,11 +42,15 @@ func FindRandomPost(collection *mongo.Collection) (post entities.Post, err error
 	//
 	cursor, err := collection.Aggregate(ctx, pipeline, options.Aggregate())
 	if err != nil {
-		return post, err
+		return entities.Post{}, err
 	}
 
-	//
-	err = cursor.Decode(&post)
-	return post, err
+	var posts []entities.Post
+	err = cursor.All(ctx, &posts)
+	if err != nil || len(posts) == 0 {
+		return entities.Post{}, err
+	}
+
+	return posts[0], err
 
 }
