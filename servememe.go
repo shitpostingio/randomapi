@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 
@@ -33,15 +34,11 @@ func serveMeme(writer http.ResponseWriter, request *http.Request) {
 
 	defer func() {
 		err = file.Close()
-		writeError(writer, err, http.StatusInternalServerError)
+		if err != nil {
+			log.Printf("unable to close file %v\n", err)
+		}
 		return
 	}()
-
-	if post.mediatype == "image" { // <-- set the content-type header
-		writer.Header().Set("Content-Type", "image/jpeg")
-	} else {
-		writer.Header().Set("Content-Type", "video/mp4")
-	}
 
 	_, err = io.Copy(writer, file)
 	if err != nil {
