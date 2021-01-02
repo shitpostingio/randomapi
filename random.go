@@ -40,7 +40,7 @@ func getRandomMeme(collection *mongo.Collection) (client.Response, error) {
 	postID := uuid.New().String()
 
 	var ext string
-	if post.Media.Type == "image" {
+	if post.Media.Type == "photo" {
 		ext = "jpg"
 	} else {
 		ext = "mp4"
