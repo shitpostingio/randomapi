@@ -7,7 +7,6 @@ import (
 
 var (
 	c              *config.Config
-	debug          bool
 	allowedOrigins []string
 
 	configFilePath string

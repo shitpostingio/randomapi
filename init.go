@@ -19,6 +19,7 @@ func init() {
 		log.Fatal(fmt.Errorf("cannot detect env: %w", err))
 	}
 
+	// connecting to mongodb
 	mongoClient, err := mongo.Connect(context.Background(), c.Mongo.MongoDBConnectionOptions())
 	if err != nil {
 		log.Fatal("Unable to connect to document store:", err)
@@ -40,6 +41,5 @@ func init() {
 
 func setCLIParams() {
 	flag.StringVar(&configFilePath, "config", "./config.toml", "configuration file path")
-	flag.BoolVar(&debug, "dev", false, "developer debug mode")
 	flag.Parse()
 }
