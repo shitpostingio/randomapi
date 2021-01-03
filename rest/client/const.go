@@ -1,9 +1,10 @@
 package client
 
+// MediaType is the string representing media type
 type MediaType string
 
 const (
-	ImageType     MediaType = "image"
-	VideoType     MediaType = "video"
-	AnimationType MediaType = "animation"
+	imageType     MediaType = "image"
+	videoType     MediaType = "video"
+	animationType MediaType = "animation"
 )

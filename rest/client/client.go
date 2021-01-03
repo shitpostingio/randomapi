@@ -1,6 +1,6 @@
 package client
 
-//Client is an istance of memeaspi client
+//Client is an istance of randomapi client
 type Client struct {
 	address string
 }
