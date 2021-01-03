@@ -12,7 +12,7 @@ var (
 
 	configFilePath string
 
-	memesCollection *mongo.Collection
+	postCollection *mongo.Collection
 
 	requestedPosts map[string]requestedPost
 )

@@ -14,15 +14,17 @@ import (
 func init() {
 	setCLIParams()
 
+	// reading config variables
 	if err := envSetup(); err != nil {
 		log.Fatal(fmt.Errorf("cannot detect env: %w", err))
 	}
 
-	mongoClient, err := mongo.Connect(context.Background(), c.MongoMemes.MongoDBConnectionOptions())
+	mongoClient, err := mongo.Connect(context.Background(), c.Mongo.MongoDBConnectionOptions())
 	if err != nil {
 		log.Fatal("Unable to connect to document store:", err)
 	}
 
+	// pinging mongo instance
 	pingCtx, cancelPingCtx := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancelPingCtx()
 	err = mongoClient.Ping(pingCtx, readpref.Primary())
@@ -30,10 +32,9 @@ func init() {
 		log.Fatal("Unable to ping document store:", err)
 	}
 
-	database := mongoClient.Database(c.MongoMemes.DatabaseName)
-	memesCollection = database.Collection("posts")
+	database := mongoClient.Database(c.Mongo.DatabaseName)
+	postCollection = database.Collection("posts")
 
-	errChan = make(chan error)
 	requestedPosts = make(map[string]requestedPost)
 }
 
