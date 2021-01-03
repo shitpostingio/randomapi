@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func serveMeme(writer http.ResponseWriter, request *http.Request) {
+func servePost(writer http.ResponseWriter, request *http.Request) {
 
 	vars := mux.Vars(request)
 
