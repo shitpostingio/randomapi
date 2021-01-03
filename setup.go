@@ -17,8 +17,10 @@ func Setup(bindAddress string, allowedOrigins []string) *http.Server {
 	meths := handlers.AllowedMethods([]string{http.MethodGet, http.MethodOptions})
 	heads := handlers.AllowedHeaders([]string{"x-user-platform", "x-user-id", "Content-Type", "content-type", "Origin"})
 
+	// setting up routes
 	router.HandleFunc("/random", random).Methods(http.MethodGet, http.MethodOptions)
 	router.HandleFunc("/random/storage/{id}", servePost).Methods(http.MethodGet)
+	router.HandleFunc("/health", healthCheck).Methods(http.MethodGet)
 
 	srv := &http.Server{
 		Handler: handlers.CORS(meths, origins, heads)(router),
