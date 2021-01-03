@@ -17,5 +17,5 @@ type Config struct {
 	PostFolder string
 	Endpoint   string
 	Port       int
-	MongoMemes mongoConfig
+	Mongo      mongoConfig
 }

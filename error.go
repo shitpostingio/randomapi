@@ -16,7 +16,7 @@ func writeError(w http.ResponseWriter, err error, errorCode int) {
 
 	jenc := json.NewEncoder(w)
 	encErr := jenc.Encode(&client.Response{
-		Error: fmt.Sprintf("could not retrieve random meme: %s", err.Error()),
+		Error: fmt.Sprintf("could not retrieve random post: %s", err.Error()),
 	})
 
 	if encErr != nil {

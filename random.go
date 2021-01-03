@@ -13,16 +13,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-// Random will return a random meme
+// Random will return a random post
 func random(w http.ResponseWriter, r *http.Request) {
 
-	meme, err := getRandomMeme(memesCollection)
+	post, err := getRandomPost(postCollection)
 	if err != nil {
 		writeError(w, err, http.StatusBadRequest)
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(meme)
+	err = json.NewEncoder(w).Encode(post)
 	if err != nil {
 		writeError(w, err, http.StatusInternalServerError)
 	}
@@ -30,7 +30,7 @@ func random(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-func getRandomMeme(collection *mongo.Collection) (client.Response, error) {
+func getRandomPost(collection *mongo.Collection) (client.Response, error) {
 
 	post, err := backstore.FindRandomPost(collection)
 	if err != nil {

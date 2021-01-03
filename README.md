@@ -2,7 +2,7 @@
 
 **Get a random post**
 ----
-  Get a random meme from a mongodb collection
+  Get a random post from a mongodb collection
 
 * **URL**
 
