@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 	"log"
-
-	"github.com/shitpostingio/randomapi/backstore"
-	"github.com/shitpostingio/randomapi/rest"
 )
 
 const (
@@ -13,25 +10,17 @@ const (
 )
 
 var (
-	feedErrors chan error
-	bs         *backstore.Backstore
-
 	//Build is the git commit ref
 	Build string
-	//Version is the memesapi version
+	//Version is the randomapi version
 	Version string
 )
 
 func main() {
+	go startCleanRequestRoutine()
 
-	go func() {
-		for err := range feedErrors {
-			log.Println(err)
-		}
-	}()
+	server := Setup(fmt.Sprintf(bindString, c.Port), allowedOrigins)
 
-	server := rest.Setup(fmt.Sprintf(bindString, c.Port), bs, allowedOrigins)
-
-	log.Printf("random memes api started\nVersion: %s\nBuild: %s", Version, Build)
+	log.Printf("random api started\nVersion: %s Build: %s", Version, Build)
 	log.Fatal(server.ListenAndServe())
 }
