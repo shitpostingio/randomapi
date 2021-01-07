@@ -6,7 +6,7 @@ type Client struct {
 }
 
 //New creates an instance of client
-func New(address, platform string) *Client {
+func New(address string) *Client {
 	return &Client{
 		address: address,
 	}

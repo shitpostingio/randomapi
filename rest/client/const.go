@@ -4,7 +4,7 @@ package client
 type MediaType string
 
 const (
-	imageType     MediaType = "image"
-	videoType     MediaType = "video"
-	animationType MediaType = "animation"
+	ImageType     MediaType = "photo"
+	VideoType     MediaType = "video"
+	AnimationType MediaType = "animation"
 )
